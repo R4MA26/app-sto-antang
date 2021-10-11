@@ -10,19 +10,6 @@
                 <h3 class="card-title">Table List</h3>
 
                 <div class="card-tools">
-                  <!-- <a
-                    type="button"
-                    href="/api/product/export_excel/"
-                    download="product.xlsx"
-                  >
-                  <button
-                  @click="loadProducts()"
-                  class="btn btn-primary"
-                  style="margin:5px"
-                  >
-                  Export
-                  </button>
-                  </a> -->
                   <form id="mainFormExel">
                     <div class="form-group">
                       <table class="table">
@@ -38,12 +25,6 @@
                       </table>
                     </div>
                   </form>
-                  
-                  
-                  <!-- <button type="button" class="btn btn-sm btn-primary" @click="newModal">
-                      <i class="fa fa-plus-square"></i>
-                      Add New
-                  </button> -->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -55,7 +36,7 @@
                       <th>Nama Paket</th>
                       <th>Description</th>
                       <th>Indeks</th>
-                      <th>Jumla Penjualan</th>
+                      <th>Jumlah Penjualan</th>
                       <th>Total Indeks</th>
                       <th>Action</th>
                     </tr>
@@ -72,10 +53,10 @@
                       <!-- <td><img v-bind:src="'/' + product.photo" width="100" alt="product"></td> -->
                       <td>
                         
-                        <a href="#" @click="editModal(product)">
+                        <!-- <a href="#" @click="editModal(product)">
                             <i class="fa fa-edit blue"></i>
                         </a>
-                        /
+                        / -->
                         <a href="#" @click="deleteProduct(product.id)">
                             <i class="fa fa-trash red"></i>
                         </a>
