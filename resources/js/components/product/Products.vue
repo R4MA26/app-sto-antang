@@ -31,8 +31,8 @@
                           <label class="btn btn-success" style="margin:5px">Select File
                             <input type="file" style="display:none" name="select_file" class="btn btn-danger">
                           </label>
-                          <label class="btn btn-primary" style="margin:5px">Upload file
-                            <input type="submit" style="display:none" name="upload" @click.prevent="saveExel">
+                          <label class="btn btn-primary" style="margin:5px" onClick="window.location.reload();">Upload file
+                            <input type="submit" style="display:none" name="upload" @click.prevent="saveExel" >
                           </label>
                         </tr>
                       </table>
@@ -51,7 +51,7 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>No</th>
                       <th>Nama Paket</th>
                       <th>Description</th>
                       <th>Indeks</th>
@@ -61,9 +61,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="product in products" :key="product.id">
+                    <tr v-for="(product,index) in products" :key="product.id">
 
-                      <td>{{product.id}}</td>
+                      <td>{{index+1}}</td>
                       <td>{{product.name}}</td>
                       <td>{{product.description | truncate(30, '...')}}</td>
                       <td>{{product.indeks}}</td>
