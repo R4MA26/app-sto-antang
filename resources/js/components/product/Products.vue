@@ -105,62 +105,7 @@
                     </button>
                 </div>
 
-                <form enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <!-- <div class="form-group" for="input-file-import">
-                            <label>Add File Exel</label>
-                            <input type="file" name="file_import" ref="import_file" @change="onFileChange"
-                                class="form-control" :class="{ 'is-invalid': form.errors }">
-                            <has-error :form="form" field="name"></has-error>
-
-                            
-                        </div> -->
-                        <div class="col-md-12">
-          <label class="form-control-label"  for="input-file-import">Upload Excel File</label>
-          <input type="file" class="form-control" :class="{ ' is-invalid' : error.message }" id="input-file-import" name="select_file"  @change="getExcelData">
-          <div v-if="error.message" class="invalid-feedback"></div>
-            
-          </div>
-                        <!-- <div class="form-group">
-                            <label>Description</label>
-                            <input v-model="form.description" type="text" name="description"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
-                            <has-error :form="form" field="description"></has-error>
-                        </div>
-                        <div class="form-group">
-                            <label>Price</label>
-                            <input v-model="form.price" type="text" name="price"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('price') }">
-                            <has-error :form="form" field="price"></has-error>
-                        </div>
-                        <div class="form-group">
-
-                            <label>Category</label>
-                            <select class="form-control" v-model="form.category_id">
-                              <option 
-                                  v-for="(cat,index) in categories" :key="index"
-                                  :value="index"
-                                  :selected="index == form.category_id">{{ cat }}</option>
-                            </select>
-                            <has-error :form="form" field="category_id"></has-error>
-                        </div>
-                        <div class="form-group">
-                            <label>Tags</label>
-                            <vue-tags-input
-                              v-model="form.tag"
-                              :tags="form.tags"
-                              :autocomplete-items="filteredItems"
-                              @tags-changed="newTags => form.tags = newTags"
-                            />
-                            <has-error :form="form" field="tags"></has-error>
-                        </div> -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-                        <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                  </form>
+                
                 </div>
             </div>
         </div>
@@ -195,7 +140,7 @@ import axios from 'axios';
 
                 }),
 
-                import_file: '',
+                // import_file: '',
 
                 categories: [],
               
@@ -235,18 +180,18 @@ import axios from 'axios';
               axios.get("api/product").then(({ data }) => (this.products = data.data));
             // }
               axios.get('api/product/export_excel')
-            .then(()=>{
-                toast({
-                    type: 'success',
-                    title: 'Export the Data'
-                })
-            })
-            .catch(()=> {
-                toast({
-                        type: 'warning',
-                        title: 'Can not Export'
-                        })
-            })
+            // .then(()=>{
+            //     toast({
+            //         type: 'success',
+            //         title: 'Export the Data'
+            //     })
+            // })
+            // .catch(()=> {
+            //     toast({
+            //             type: 'warning',
+            //             title: 'Can not Export'
+            //             })
+            // })
           },
           loadCategories(){
               axios.get("/api/category/list").then(({ data }) => (this.categories = data.data));
