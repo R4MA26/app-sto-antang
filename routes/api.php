@@ -34,7 +34,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::get('/product', [ProductController::class, 'index']);
         Route::get('/product/export_excel', [ProductController::class, 'export_excel']);
-        Route::post('/product/import_excel', [ProductController::class, 'import_excel']);
+        Route::post('/product/import_excel', [ProductController::class, 'saveExel']);
         Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 
 });

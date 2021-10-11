@@ -10,7 +10,7 @@
                 <h3 class="card-title">Table List</h3>
 
                 <div class="card-tools">
-                  <a
+                  <!-- <a
                     type="button"
                     href="/api/product/export_excel/"
                     download="product.xlsx"
@@ -18,15 +18,32 @@
                   <button
                   @click="loadProducts()"
                   class="btn btn-primary"
+                  style="margin:5px"
                   >
                   Export
                   </button>
-                  </a>
+                  </a> -->
+                  <form id="mainFormExel">
+                    <div class="form-group">
+                      <table class="table">
+                        <tr>
+                          <a style="margin: 5px" href="/api/product/export_excel/" class="btn btn-danger">Download</a>
+                          <label class="btn btn-success" style="margin:5px">Select File
+                            <input type="file" style="display:none" name="select_file" class="btn btn-danger">
+                          </label>
+                          <label class="btn btn-primary" style="margin:5px">Upload file
+                            <input type="submit" style="display:none" name="upload" @click.prevent="saveExel">
+                          </label>
+                        </tr>
+                      </table>
+                    </div>
+                  </form>
                   
-                  <button type="button" class="btn btn-sm btn-primary" @click="newModal">
+                  
+                  <!-- <button type="button" class="btn btn-sm btn-primary" @click="newModal">
                       <i class="fa fa-plus-square"></i>
                       Add New
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <!-- /.card-header -->
@@ -88,7 +105,7 @@
                     </button>
                 </div>
 
-                <form @submit.prevent="editmode ? updateProduct() : proceedAction()">
+                <form enctype="multipart/form-data">
                     <div class="modal-body">
                         <!-- <div class="form-group" for="input-file-import">
                             <label>Add File Exel</label>
@@ -100,7 +117,7 @@
                         </div> -->
                         <div class="col-md-12">
           <label class="form-control-label"  for="input-file-import">Upload Excel File</label>
-          <input type="file" class="form-control" :class="{ ' is-invalid' : error.message }" id="input-file-import" name="file_import" ref="import_file"  @change="onFileChange">
+          <input type="file" class="form-control" :class="{ ' is-invalid' : error.message }" id="input-file-import" name="select_file"  @change="getExcelData">
           <div v-if="error.message" class="invalid-feedback"></div>
             
           </div>
@@ -153,6 +170,7 @@
 
 <script>
     import VueTagsInput from '@johmun/vue-tags-input';
+import axios from 'axios';
 
     export default {
       components: {
@@ -187,30 +205,6 @@
         },
         methods: {
 
-          onFileChange(e) {
-          this.import_file = e.target.files[0];
-          },
-
-          proceedAction() {
-        let formData = new FormData();
-        formData.append('import_file', this.import_file);
-
-          axios.post('api/product/import_excel', formData, {
-              headers: { 'content-type': 'multipart/form-data' }
-            })
-            .then(response => {
-                if(response.status === 200) {
-                  // codes here after the file is upload successfully
-                }
-            })
-            .catch(error => {
-                // code here when an upload is not valid
-                this.uploading = false
-                this.error = error.response.data
-                console.log('check error: ', this.error)
-            });
-        },
-
           getResults(page = 1) {
 
               this.$Progress.start();
@@ -219,6 +213,22 @@
 
               this.$Progress.finish();
           },
+          saveExel(){
+            var $mainFormExel = $('#mainFormExel')
+            var data = new FormData(mainFormExel)
+            axios.post('api/product/import_excel', data)
+                  .then((res) => {
+                    this.$Swal({
+                      title: 'succes',
+                      text: 'all data',
+                      icon: 'succes',
+                      confirmButtonText: 'cool'
+                    });
+
+                  })
+          },
+
+
           loadProducts(){
 
             // if(this.$gate.isAdmin()){
