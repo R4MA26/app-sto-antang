@@ -2,138 +2,113 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Http\Requests\Products\ProductRequest;
+// namespace App\Http\Controllers;
+
+
+// use App\Http\Requests\Products\ProductRequest;
+// use App\Http\Controllers\API\V1\BaseController;
+// use App\Http\Controllers\Controller;
+
+// use Illuminate\Http\Request;
+use Session;
+
+
 use App\Models\Product;
-use App\Models\Tag;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
+use App\Imports\ProductImport;
+use Illuminate\Database\QueryException;
+use Symfony\Component\HttpFoundation\Response;
+// use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+
+
+// use App\Models\Tag;
+// use Illuminate\Http\Request;
 
 class ProductController extends BaseController
 {
-
-    protected $product = '';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(Product $product)
-    {
-        $this->middleware('auth:api');
-        $this->product = $product;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $products = $this->product->latest()->with('category', 'tags')->paginate(10);
+        $product = Product::orderBy('id', 'DESC')->get();
 
-        return $this->sendResponse($products, 'Product list');
+        $response = [
+            'massage' => 'List Product order BY time',
+            'data' => $product
+        ];
+
+        return response()->json($response, Response::HTTP_OK);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  App\Http\Requests\Products\ProductRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ProductRequest $request)
+    public function export_excel()
     {
-        $product = $this->product->create([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'price' => $request->get('price'),
-            'category_id' => $request->get('category_id'),
-        ]);
-
-        // update pivot table
-        $tag_ids = [];
-        foreach ($request->get('tags') as $tag) {
-            $existingtag = Tag::whereName($tag['text'])->first();
-            if ($existingtag) {
-                $tag_ids[] = $existingtag->id;
-            } else {
-                $newtag = Tag::create([
-                    'name' => $tag['text']
-                ]);
-                $tag_ids[] = $newtag->id;
-            }
-        }
-        $product->tags()->sync($tag_ids);
-
-        return $this->sendResponse($product, 'Product Created Successfully');
+        return Excel::download(new ProductsExport, 'product.xlsx');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+
+    public function import_excel(Request $request)
     {
-        $product = $this->product->with(['category', 'tags'])->findOrFail($id);
 
-        return $this->sendResponse($product, 'Product Details');
-    }
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataProduct', $namaFile);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(ProductRequest $request, $id)
-    {
-        $product = $this->product->findOrFail($id);
+        Excel::import(new ProductImport, public_path('/DataProduct' .$namaFile));
 
-        $product->update($request->all());
+        return response()->json(['massage' => 'uploaded succesfully'], 200);
 
-        // update pivot table
-        $tag_ids = [];
-        foreach ($request->get('tags') as $tag) {
-            $existingtag = Tag::whereName($tag['text'])->first();
-            if ($existingtag) {
-                $tag_ids[] = $existingtag->id;
-            } else {
-                $newtag = Tag::create([
-                    'name' => $tag['text']
-                ]);
-                $tag_ids[] = $newtag->id;
-            }
-        }
-        $product->tags()->sync($tag_ids);
+        // // validasi
+        // $this->validate($request, [
+        //     'file' => 'required|mimes:csv,xls,xlsx'
+        // ]);
 
-        return $this->sendResponse($product, 'Product Information has been updated');
+        // // menangkap file excel
+        // $file = $request->file('file');
+
+        // // membuat nama file unik
+        // $nama_file = rand() . $file->getClientOriginalName();
+
+        // // upload ke folder file_siswa di dalam folder public
+        // $file->move('file_siswa', $nama_file);
+
+        // // import data
+        // Excel::import(new ProductImport, public_path('/file_siswa/' . $nama_file));
+
+        // // notifikasi dengan session
+        // // Session::flash('sukses', 'Data Siswa Berhasil Diimport!');
+
+        // // alihkan halaman kembali
+        // // return redirect('/siswa');
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        $transaction = Product::findOrFail($id);
 
-        $this->authorize('isAdmin');
 
-        $product = $this->product->findOrFail($id);
+        try {
+            $transaction->delete();
+            $response = [
+                'massage' => 'Transaction deleted'
+            ];
 
-        $product->delete();
-
-        return $this->sendResponse($product, 'Product has been Deleted');
+            return response()->json($response, Response::HTTP_OK);
+        } catch (QueryException $e) {
+            return response()->json([
+                'massage' => "Failed " . $e->errorInfo
+            ]);
+        }
     }
 
-    public function upload(Request $request)
-    {
-        $fileName = time() . '.' . $request->file->getClientOriginalExtension();
-        $request->file->move(public_path('upload'), $fileName);
 
-        return response()->json(['success' => true]);
-    }
+
 }

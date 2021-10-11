@@ -10,6 +10,18 @@
                 <h3 class="card-title">Table List</h3>
 
                 <div class="card-tools">
+                  <a
+                    type="button"
+                    href="/api/product/export_excel/"
+                    download="product.xlsx"
+                  >
+                  <button
+                  @click="loadProducts()"
+                  class="btn btn-primary"
+                  >
+                  Export
+                  </button>
+                  </a>
                   
                   <button type="button" class="btn btn-sm btn-primary" @click="newModal">
                       <i class="fa fa-plus-square"></i>
@@ -32,14 +44,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                     <tr v-for="product in products.data" :key="product.id">
+                    <tr v-for="product in products" :key="product.id">
 
                       <td>{{product.id}}</td>
                       <td>{{product.name}}</td>
                       <td>{{product.description | truncate(30, '...')}}</td>
-                      <td>{{product.category.name}}</td>
-                      <td>{{}}</td>
-                      <td>{{product.price}}</td>
+                      <td>{{product.indeks}}</td>
+                      <td>{{product.jumlah}}</td>
+                      <td>{{product.total}}</td>
                       <!-- <td><img v-bind:src="'/' + product.photo" width="100" alt="product"></td> -->
                       <td>
                         
@@ -76,14 +88,22 @@
                     </button>
                 </div>
 
-                <form @submit.prevent="editmode ? updateProduct() : createProduct()">
+                <form @submit.prevent="editmode ? updateProduct() : proceedAction()">
                     <div class="modal-body">
-                        <div class="form-group">
+                        <!-- <div class="form-group" for="input-file-import">
                             <label>Add File Exel</label>
-                            <input type="file" name="name"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                            <input type="file" name="file_import" ref="import_file" @change="onFileChange"
+                                class="form-control" :class="{ 'is-invalid': form.errors }">
                             <has-error :form="form" field="name"></has-error>
-                        </div>
+
+                            
+                        </div> -->
+                        <div class="col-md-12">
+          <label class="form-control-label"  for="input-file-import">Upload Excel File</label>
+          <input type="file" class="form-control" :class="{ ' is-invalid' : error.message }" id="input-file-import" name="file_import" ref="import_file"  @change="onFileChange">
+          <div v-if="error.message" class="invalid-feedback"></div>
+            
+          </div>
                         <!-- <div class="form-group">
                             <label>Description</label>
                             <input v-model="form.description" type="text" name="description"
@@ -142,6 +162,7 @@
             return {
                 editmode: false,
                 products : {},
+                error: {},
                 form: new Form({
                     id : '',
                     category : '',
@@ -152,7 +173,12 @@
                     category_id: '',
                     price: '',
                     photoUrl: '',
+                // import_file: '',
+
                 }),
+
+                import_file: '',
+
                 categories: [],
               
                 tag:  '',
@@ -160,6 +186,30 @@
             }
         },
         methods: {
+
+          onFileChange(e) {
+          this.import_file = e.target.files[0];
+          },
+
+          proceedAction() {
+        let formData = new FormData();
+        formData.append('import_file', this.import_file);
+
+          axios.post('api/product/import_excel', formData, {
+              headers: { 'content-type': 'multipart/form-data' }
+            })
+            .then(response => {
+                if(response.status === 200) {
+                  // codes here after the file is upload successfully
+                }
+            })
+            .catch(error => {
+                // code here when an upload is not valid
+                this.uploading = false
+                this.error = error.response.data
+                console.log('check error: ', this.error)
+            });
+        },
 
           getResults(page = 1) {
 
@@ -174,6 +224,19 @@
             // if(this.$gate.isAdmin()){
               axios.get("api/product").then(({ data }) => (this.products = data.data));
             // }
+              axios.get('api/product/export_excel')
+            .then(()=>{
+                toast({
+                    type: 'success',
+                    title: 'Export the Data'
+                })
+            })
+            .catch(()=> {
+                toast({
+                        type: 'warning',
+                        title: 'Can not Export'
+                        })
+            })
           },
           loadCategories(){
               axios.get("/api/category/list").then(({ data }) => (this.categories = data.data));
@@ -199,7 +262,7 @@
           createProduct(){
               this.$Progress.start();
 
-              this.form.post('api/product')
+              this.form.post('api/product/import_excel')
               .then((data)=>{
                 if(data.data.success){
                   $('#addNew').modal('hide');
@@ -283,6 +346,8 @@
             this.$Progress.start();
 
             this.loadProducts();
+            // this.proceedAction();
+            // this.onFileChange(e);
             this.loadCategories();
             this.loadTags();
 

@@ -167,7 +167,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -178,6 +177,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\ProductRepositoryServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
