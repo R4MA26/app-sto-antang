@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('indeks');
             $table->string('jumlah');
-            $table->string('total');
+            $table->string('total')->nullable();
             // $table->integer('category_id');
             // $table->string('photo')->nullable();
             $table->timestamps();

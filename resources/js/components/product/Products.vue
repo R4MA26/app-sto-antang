@@ -47,9 +47,9 @@
                       <td>{{index+1}}</td>
                       <td>{{product.name}}</td>
                       <td>{{product.description | truncate(30, '...')}}</td>
-                      <td>{{product.indeks}}</td>
-                      <td>{{product.jumlah}}</td>
-                      <td>{{product.total}}</td>
+                      <td class="input1">{{product.indeks}}</td>
+                      <td class="input2">{{product.jumlah}}</td>
+                      <td>{{product.indeks * product.jumlah}}</td>
                       <!-- <td><img v-bind:src="'/' + product.photo" width="100" alt="product"></td> -->
                       <td>
                         
@@ -117,7 +117,9 @@ import axios from 'axios';
                     category_id: '',
                     price: '',
                     photoUrl: '',
-                // import_file: '',
+                    input1:0,
+                    input2:0,
+                    hasil:0,
 
                 }),
 
@@ -138,6 +140,10 @@ import axios from 'axios';
               axios.get('api/product?page=' + page).then(({ data }) => (this.products = data.data));
 
               this.$Progress.finish();
+          },
+
+          kali() {
+            this.hasil = parseInt(this.input1) * parseInt(this.input2)
           },
           saveExel(){
             var $mainFormExel = $('#mainFormExel')
