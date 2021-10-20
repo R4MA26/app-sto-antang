@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\ProductController;
+use App\Http\Controllers\API\V1\SelesController;
 use App\Http\Controllers\API\V1\UserController;
 use App\Http\Controllers\API\V1\CategoryController;
 
@@ -38,6 +39,10 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::get('/product/export_excel', [ProductController::class, 'export_excel']);
         Route::post('/product/import_excel', [ProductController::class, 'saveExel']);
         Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+
+        Route::get('/seles', [SelesController::class, 'index']);
+
+        // Route::get('/seles', [SelesController::class, 'index']);
         // Route::get('/user', [UserController::class, 'index']);
         // Route::post('/user', [UserController::class, 'store']);
 

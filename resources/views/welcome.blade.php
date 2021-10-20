@@ -80,7 +80,7 @@
                         <a href="{{ route('login') }}" class="btn btn-app btn-primary text-white">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }} " class="btn btn-app btn-success text-white">Register</a>
+                            {{-- <a href="{{ route('register') }} " class="btn btn-app btn-success text-white">Register</a> --}}
                         @endif
                     @endauth
                 </div>

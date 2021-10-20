@@ -3,6 +3,8 @@ export default [
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/seles', component: require('./components/sales.vue').default },
+
     // { path: '/products', component: require('./components/product/Products.vue').default },
     { path: '/products', component: require('./components/product/Products.vue').default },
     { path: '/product/tag', component: require('./components/product/Tag.vue').default },

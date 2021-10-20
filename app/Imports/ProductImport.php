@@ -19,7 +19,7 @@ class ProductImport implements ToModel
             'description' => $row[1],
             'indeks' => $row[2],
             'jumlah' => $row[3],
-            'total' => $row[4],
+            // 'total' => $row[4],
         ]);
     }
 }
