@@ -36,6 +36,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::get('/siswa/export_excel', 'ProductController@export_excel');
 Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::get('/product', [ProductController::class, 'index']);
+        Route::get('/product/multiply', [ProductController::class, 'multiply']);
         Route::get('/product/export_excel', [ProductController::class, 'export_excel']);
         Route::post('/product/import_excel', [ProductController::class, 'saveExel']);
         Route::delete('/product/{id}', [ProductController::class, 'destroy']);

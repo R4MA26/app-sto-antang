@@ -14,12 +14,15 @@ class CreateSelesTable extends Migration
     public function up()
     {
         Schema::create('seles', function (Blueprint $table) {
+            // $table->engine = 'InnoDB';
             $table->id();
             $table->string('nama');
             $table->string('teritory');
+            // $table->foreignId('uuid')->unique();
             $table->string('kontact');
             $table->string('supervisor');
             $table->timestamps();
+            // $table->foreign('uuid')->references('id')->on('products');
         });
     }
 

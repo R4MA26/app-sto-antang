@@ -49,9 +49,9 @@
                       <td>{{ seles.nama }}</td>
                       <td>{{ seles.teritory }}</td>
                       <td>{{ seles.kontact }}</td>
-                      <td>Singgih AR</td>
-                      <td></td>
-                      <td></td>
+                      <td>{{ seles.supervisor }}</td>
+                      <td>11</td>
+                      <td>20.4</td>
                       <!-- <td><img v-bind:src="'/' + product.photo" width="100" alt="product"></td> -->
                       <td>
                         
@@ -159,7 +159,7 @@ import axios from 'axios';
           },
 
 
-          loadProducts(){
+          loadSeles(){
 
             // if(this.$gate.isAdmin()){
               axios.get("api/seles").then(({ data }) => (this.seles = data.data));
@@ -177,6 +177,12 @@ import axios from 'axios';
             //             title: 'Can not Export'
             //             })
             // })
+          },
+          loadProducts(){
+
+            // if(this.$gate.isAdmin()){
+              axios.get("api/product").then(({ data }) => (this.product = data.data));
+            
           },
           loadCategories(){
               axios.get("/api/category/list").then(({ data }) => (this.categories = data.data));
@@ -286,6 +292,7 @@ import axios from 'axios';
             this.$Progress.start();
 
             this.loadProducts();
+            this.loadSeles();
             // this.proceedAction();
             // this.onFileChange(e);
             this.loadCategories();

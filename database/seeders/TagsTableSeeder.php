@@ -14,19 +14,19 @@ class TagsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        DB::table('tags')->truncate();
+    // public function run()
+    // {
+    //     DB::table('tags')->truncate();
 
-        DB::table('tags')->insert(
-            [
-                [
-                    'name' => 'Tag 1'
-                ],
-                [
-                    'name' => 'Tag 2'
-                ],
-            ]
-        );
-    }
+    //     DB::table('tags')->insert(
+    //         [
+    //             [
+    //                 'name' => 'Tag 1'
+    //             ],
+    //             [
+    //                 'name' => 'Tag 2'
+    //             ],
+    //         ]
+    //     );
+    // }
 }

@@ -10,7 +10,9 @@ namespace App\Http\Controllers\API\V1;
 // use App\Http\Controllers\Controller;
 
 // use Illuminate\Http\Request;
-use Session;
+// use Session;
+
+use Illuminate\Support\Facades\DB;
 
 
 use App\Models\Product;
@@ -54,6 +56,7 @@ class ProductController extends BaseController
         // return $request->all();
         $path = $request->file('select_file')->getRealPath();
         Excel::import(new ProductImport, $path);
+
     }
 
     /**
@@ -79,6 +82,15 @@ class ProductController extends BaseController
                 'massage' => "Failed " . $e->errorInfo
             ]);
         }
+    }
+
+    public function multiply()
+    {
+       $hasil = DB::table('products')
+        ->select(DB::raw('(products.indeks * products.jumlah)'))
+        ->get();
+
+        return $hasil;
     }
 
 
