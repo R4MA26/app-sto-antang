@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SelesController;
 use App\Http\Controllers\API\V1\DuaController;
+use App\Http\Controllers\API\V1\EmpatController;
 use App\Http\Controllers\API\V1\TigaController;
 // use App\Http\Controllers\API\V1\UserController;
 // use App\Http\Controllers\API\V1\CategoryController;
@@ -55,6 +56,11 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::delete('/tiga/{id}', [TigaController::class, 'destroy']);
         Route::post('/tiga/import_excel', [TigaController::class, 'saveExel']);
         Route::get('/tiga/export_excel', [TigaController::class, 'export_excel']);
+
+        Route::get('/empat', [EmpatController::class, 'index']);
+        Route::delete('/empat/{id}', [EmpatController::class, 'destroy']);
+        Route::post('/empat/import_excel', [EmpatController::class, 'saveExel']);
+        Route::get('/empat/export_excel', [EmpatController::class, 'export_excel']);
 
 
 
