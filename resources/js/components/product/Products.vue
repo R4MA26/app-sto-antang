@@ -51,11 +51,13 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nama Sales</th>
-                    <th>Nama Paket</th>
-                    <th>Description</th>
+                    <th>Nama Pelanggan</th>
+                    <th>No Inetrn</th>
+                    <th>kcontact</th>
+                    <th>kecepatan</th>
+                    <th>deskripsi Paket</th>
                     <th>Indeks</th>
-                    <th>Jumlah Penjualan</th>
+                    <th>Jumlah Paket</th>
                     <th>Total Indeks</th>
                     <th>Action</th>
                   </tr>
@@ -63,9 +65,11 @@
                 <tbody>
                   <tr v-for="(product, index) in products" :key="product.id">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ product.sales }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.description | truncate(30, "...") }}</td>
+                    <td>{{ product.nama }}</td>
+                    <td>{{ product.no_inetrn }}</td>
+                    <td>{{ product.kcontact }}</td>
+                    <td>{{ product.kecepatan }}</td>
+                    <td>{{ product.description }}</td>
                     <td class="input1">{{ product.indeks }}</td>
                     <td class="input2">{{ product.jumlah }}</td>
                     <td>{{ product.total }}</td>
@@ -81,7 +85,9 @@
                     </td>
                   </tr>
                   <tr class="text-danger font-weight-bold">
-                    <td>Total :</td>
+                    <td>Total:</td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

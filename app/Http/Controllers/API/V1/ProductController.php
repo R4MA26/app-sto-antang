@@ -46,7 +46,7 @@ class ProductController extends BaseController
 
     public function export_excel()
     {
-        return Excel::download(new ProductsExport, 'product.xlsx');
+        return Excel::download(new ProductsExport, 'index.xlsx');
     }
 
 
@@ -57,6 +57,23 @@ class ProductController extends BaseController
         $path = $request->file('select_file')->getRealPath();
         Excel::import(new ProductImport, $path);
 
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $transaction = Product::findOrFail($id);
+        $response = [
+            'massage' => 'Detail of transaction resource',
+            'data' => $transaction
+        ];
+
+        return response()->json($response, Response::HTTP_OK);
     }
 
     /**
@@ -84,14 +101,7 @@ class ProductController extends BaseController
         }
     }
 
-    public function multiply()
-    {
-       $hasil = DB::table('products')
-        ->select(DB::raw('(products.indeks * products.jumlah)'))
-        ->get();
 
-        return $hasil;
-    }
 
 
 

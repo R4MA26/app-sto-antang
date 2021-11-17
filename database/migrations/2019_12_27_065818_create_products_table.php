@@ -16,16 +16,19 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             // $table->integer('uuid')->primary();
-            $table->string('sales');
-            $table->string('name');
+            $table->string('nama');
+            $table->string('no_inetrn');
+            $table->string('kcontact');
+            $table->string('kecepatan');
             $table->longText('description')->nullable();
-            $table->integer('indeks');
+            $table->float('indeks');
             $table->integer('jumlah');
             // $table->string('total')->nullable();
             // $table->integer('category_id');
             // $table->string('photo')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            
         });
     }
 

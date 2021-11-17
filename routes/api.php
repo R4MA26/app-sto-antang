@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SelesController;
-use App\Http\Controllers\API\V1\UserController;
-use App\Http\Controllers\API\V1\CategoryController;
+use App\Http\Controllers\API\V1\DuaController;
+use App\Http\Controllers\API\V1\TigaController;
+// use App\Http\Controllers\API\V1\UserController;
+// use App\Http\Controllers\API\V1\CategoryController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -36,12 +38,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::get('/siswa/export_excel', 'ProductController@export_excel');
 Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::get('/product', [ProductController::class, 'index']);
-        Route::get('/product/multiply', [ProductController::class, 'multiply']);
+        // Route::get('/product/multiply', [ProductController::class, 'multiply']);
         Route::get('/product/export_excel', [ProductController::class, 'export_excel']);
         Route::post('/product/import_excel', [ProductController::class, 'saveExel']);
         Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+        Route::get('/product/show/{id}', [ProductController::class, 'show']);
 
         Route::get('/seles', [SelesController::class, 'index']);
+
+        Route::get('/dua', [DuaController::class, 'index']);
+        Route::delete('/dua/{id}', [DuaController::class, 'destroy']);
+        Route::post('/dua/import_excel', [DuaController::class, 'saveExel']);
+        Route::get('/dua/export_excel', [DuaController::class, 'export_excel']);
+
+        Route::get('/tiga', [TigaController::class, 'index']);
+        Route::delete('/tiga/{id}', [TigaController::class, 'destroy']);
+        Route::post('/tiga/import_excel', [TigaController::class, 'saveExel']);
+        Route::get('/tiga/export_excel', [TigaController::class, 'export_excel']);
+
+
 
         // Route::get('/seles', [SelesController::class, 'index']);
         // Route::get('/user', [UserController::class, 'index']);

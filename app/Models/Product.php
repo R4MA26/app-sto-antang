@@ -16,7 +16,7 @@ class Product extends Model
     protected $primaryKey = 'id';
 
 
-    protected $fillable = ['sales','name', 'description', 'indeks', 'jumlah'];
+    protected $fillable = ['nama','no_inetrn', 'kcontact', 'kecepatan', 'description', 'indeks', 'jumlah'];
 }
 
 // {
