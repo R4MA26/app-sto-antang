@@ -7,6 +7,7 @@ use App\Http\Controllers\API\V1\EmpatController;
 use App\Http\Controllers\API\V1\EnamController;
 use App\Http\Controllers\API\V1\LimaController;
 use App\Http\Controllers\API\V1\TigaController;
+use App\Http\Controllers\API\V1\TujuhController;
 // use App\Http\Controllers\API\V1\UserController;
 // use App\Http\Controllers\API\V1\CategoryController;
 
@@ -74,6 +75,10 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::post('/enam/import_excel', [EnamController::class, 'saveExel']);
         Route::get('/enam/export_excel', [EnamController::class, 'export_excel']);
 
+        Route::get('/tujuh', [TujuhController::class, 'index']);
+        Route::delete('/tujuh/{id}', [TujuhController::class, 'destroy']);
+        Route::post('/tujuh/import_excel', [TujuhController::class, 'saveExel']);
+        Route::get('/tujuh/export_excel', [TujuhController::class, 'export_excel']);
 
 
 
