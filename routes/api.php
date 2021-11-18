@@ -4,6 +4,7 @@ use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SelesController;
 use App\Http\Controllers\API\V1\DuaController;
 use App\Http\Controllers\API\V1\EmpatController;
+use App\Http\Controllers\API\V1\EnamController;
 use App\Http\Controllers\API\V1\LimaController;
 use App\Http\Controllers\API\V1\TigaController;
 // use App\Http\Controllers\API\V1\UserController;
@@ -67,6 +68,12 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::delete('/lima/{id}', [LimaController::class, 'destroy']);
         Route::post('/lima/import_excel', [LimaController::class, 'saveExel']);
         Route::get('/lima/export_excel', [LimaController::class, 'export_excel']);
+
+        Route::get('/enam', [EnamController::class, 'index']);
+        Route::delete('/enam/{id}', [EnamController::class, 'destroy']);
+        Route::post('/enam/import_excel', [EnamController::class, 'saveExel']);
+        Route::get('/enam/export_excel', [EnamController::class, 'export_excel']);
+
 
 
 
