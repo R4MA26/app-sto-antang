@@ -13,6 +13,7 @@ export default [
     { path: '/delapan', component: require('./components/Delapan.vue').default },
     { path: '/sembilan', component: require('./components/Sembilan.vue').default },
     { path: '/sepuluh', component: require('./components/Sepuluh.vue').default },
+    { path: '/sebelas', component: require('./components/Sebelas.vue').default },
 
 
     // { path: '/products', component: require('./components/product/Products.vue').default },
