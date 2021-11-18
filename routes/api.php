@@ -7,6 +7,7 @@ use App\Http\Controllers\API\V1\DuaController;
 use App\Http\Controllers\API\V1\EmpatController;
 use App\Http\Controllers\API\V1\EnamController;
 use App\Http\Controllers\API\V1\LimaController;
+use App\Http\Controllers\API\V1\SembilanController;
 use App\Http\Controllers\API\V1\TigaController;
 use App\Http\Controllers\API\V1\TujuhController;
 // use App\Http\Controllers\API\V1\UserController;
@@ -86,6 +87,10 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::post('/delapan/import_excel', [DelapanController::class, 'saveExel']);
         Route::get('/delapan/export_excel', [DelapanController::class, 'export_excel']);
 
+        Route::get('/sembilan', [SembilanController::class, 'index']);
+        Route::delete('/sembilan/{id}', [SembilanController::class, 'destroy']);
+        Route::post('/sembilan/import_excel', [SembilanController::class, 'saveExel']);
+        Route::get('/sembilan/export_excel', [SembilanController::class, 'export_excel']);
 
         // Route::get('/seles', [SelesController::class, 'index']);
         // Route::get('/user', [UserController::class, 'index']);
