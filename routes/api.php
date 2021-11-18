@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\DelapanController;
+use App\Http\Controllers\API\V1\DuaBelasController;
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SelesController;
 use App\Http\Controllers\API\V1\DuaController;
@@ -103,6 +104,11 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::delete('/sebelas/{id}', [SebelasController::class, 'destroy']);
         Route::post('/sebelas/import_excel', [SebelasController::class, 'saveExel']);
         Route::get('/sebelas/export_excel', [SebelasController::class, 'export_excel']);
+
+        Route::get('/duabelas', [DuaBelasController::class, 'index']);
+        Route::delete('/duabelas/{id}', [DuaBelasController::class, 'destroy']);
+        Route::post('/duabelas/import_excel', [DuaBelasController::class, 'saveExel']);
+        Route::get('/duabelas/export_excel', [DuaBelasController::class, 'export_excel']);
 
         // Route::get('/seles', [SelesController::class, 'index']);
         // Route::get('/user', [UserController::class, 'index']);
