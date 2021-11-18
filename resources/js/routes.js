@@ -18,6 +18,7 @@ export default [
     { path: '/tigabelas', component: require('./components/TigaBelas.vue').default },
     { path: '/empatbelas', component: require('./components/EmpatBelas.vue').default },
     { path: '/limabelas', component: require('./components/LimaBelas.vue').default },
+    { path: '/enambelas', component: require('./components/EnamBelas.vue').default },
 
 
     // { path: '/products', component: require('./components/product/Products.vue').default },
