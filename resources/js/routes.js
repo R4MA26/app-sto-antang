@@ -7,6 +7,7 @@ export default [
     { path: '/dua', component: require('./components/Dua.vue').default },
     { path: '/tiga', component: require('./components/Tiga.vue').default },
     { path: '/empat', component: require('./components/empat.vue').default },
+    { path: '/lima', component: require('./components/Lima.vue').default },
 
 
     // { path: '/products', component: require('./components/product/Products.vue').default },
