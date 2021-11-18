@@ -10,6 +10,7 @@ export default [
     { path: '/lima', component: require('./components/Lima.vue').default },
     { path: '/enam', component: require('./components/Enam.vue').default },
     { path: '/tujuh', component: require('./components/Tujuh.vue').default },
+    { path: '/delapan', component: require('./components/Delapan.vue').default },
 
 
     // { path: '/products', component: require('./components/product/Products.vue').default },
