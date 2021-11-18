@@ -8,6 +8,7 @@ use App\Http\Controllers\API\V1\DuaController;
 use App\Http\Controllers\API\V1\EmpatBelasController;
 use App\Http\Controllers\API\V1\EmpatController;
 use App\Http\Controllers\API\V1\EnamController;
+use App\Http\Controllers\API\V1\LimaBelasController;
 use App\Http\Controllers\API\V1\LimaController;
 use App\Http\Controllers\API\V1\SebelasController;
 use App\Http\Controllers\API\V1\SembilanController;
@@ -121,6 +122,11 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::delete('/empatbelas/{id}', [EmpatBelasController::class, 'destroy']);
         Route::post('/empatbelas/import_excel', [EmpatBelasController::class, 'saveExel']);
         Route::get('/empatbelas/export_excel', [EmpatBelasController::class, 'export_excel']);
+
+        Route::get('/limabelas', [LimaBelasController::class, 'index']);
+        Route::delete('/limabelas/{id}', [LimaBelasController::class, 'destroy']);
+        Route::post('/limabelas/import_excel', [LimaBelasController::class, 'saveExel']);
+        Route::get('/limabelas/export_excel', [LimaBelasController::class, 'export_excel']);
         // Route::get('/seles', [SelesController::class, 'index']);
         // Route::get('/user', [UserController::class, 'index']);
         // Route::post('/user', [UserController::class, 'store']);
