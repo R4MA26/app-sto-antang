@@ -11,6 +11,7 @@ use App\Http\Controllers\API\V1\LimaController;
 use App\Http\Controllers\API\V1\SebelasController;
 use App\Http\Controllers\API\V1\SembilanController;
 use App\Http\Controllers\API\V1\SepuluhController;
+use App\Http\Controllers\API\V1\TigaBelasController;
 use App\Http\Controllers\API\V1\TigaController;
 use App\Http\Controllers\API\V1\TujuhController;
 // use App\Http\Controllers\API\V1\UserController;
@@ -110,6 +111,10 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         Route::post('/duabelas/import_excel', [DuaBelasController::class, 'saveExel']);
         Route::get('/duabelas/export_excel', [DuaBelasController::class, 'export_excel']);
 
+        Route::get('/tigabelas', [TigaBelasController::class, 'index']);
+        Route::delete('/tigabelas/{id}', [TigaBelasController::class, 'destroy']);
+        Route::post('/tigabelas/import_excel', [TigaBelasController::class, 'saveExel']);
+        Route::get('/tigabelas/export_excel', [TigaBelasController::class, 'export_excel']);
         // Route::get('/seles', [SelesController::class, 'index']);
         // Route::get('/user', [UserController::class, 'index']);
         // Route::post('/user', [UserController::class, 'store']);

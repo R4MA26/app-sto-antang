@@ -15,6 +15,7 @@ export default [
     { path: '/sepuluh', component: require('./components/Sepuluh.vue').default },
     { path: '/sebelas', component: require('./components/Sebelas.vue').default },
     { path: '/duabelas', component: require('./components/DuaBelas.vue').default },
+    { path: '/tigabelas', component: require('./components/TigaBelas.vue').default },
 
 
     // { path: '/products', component: require('./components/product/Products.vue').default },

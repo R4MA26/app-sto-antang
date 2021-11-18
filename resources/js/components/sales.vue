@@ -231,7 +231,7 @@
                     <td>20.4</td> -->
                     <!-- <td><img v-bind:src="'/' + product.photo" width="100" alt="product"></td> -->
                     <td>
-                      <router-link to="/products">
+                      <router-link to="/tigabelas">
                         <i class="fa fa-eye blue"></i>
                       </router-link>
                     </td>
