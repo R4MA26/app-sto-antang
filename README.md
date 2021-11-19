@@ -8,9 +8,9 @@
 ## About Repository
 
 Nama KLP: 
-        Rama Ismaya Sofyan
-        Syamsul Rijal Asri
-        Rafly Maulana
+       - Rama Ismaya Sofyan
+       - Syamsul Rijal Asri
+       - Rafly Maulana
 
 
 ## Tech Specification
