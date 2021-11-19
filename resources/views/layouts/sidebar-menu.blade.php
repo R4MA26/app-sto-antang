@@ -29,7 +29,7 @@
 
       
 
-      @can('isAdmin')
+      {{-- @can('isAdmin')
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-cog green"></i>
@@ -49,26 +49,26 @@
             </router-link>
           </li>
           <li class="nav-item">
-            {{-- <router-link to="/product/tag" class="nav-link">
+            <router-link to="/product/tag" class="nav-link">
               <i class="nav-icon fas fa-tags green"></i>
               <p>
                 Tags
               </p>
-            </router-link> --}}
+            </router-link>
           </li>
           
-            {{-- <li class="nav-item">
+            <li class="nav-item">
               <router-link to="/developer" class="nav-link">
                   <i class="nav-icon fas fa-cogs white"></i>
                   <p>
                       Developer
                   </p>
               </router-link>
-            </li> --}}
+            </li>
         </ul>
       </li>
 
-      @endcan
+      @endcan --}}
       
       
 
